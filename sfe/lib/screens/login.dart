@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:sfe/screens/forgetPassword.dart';
 import 'package:sfe/screens/tables.dart';
+import 'package:sfe/widgets/widget.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    home: Login(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
 
 class Login extends StatefulWidget {
   const Login({super.key});

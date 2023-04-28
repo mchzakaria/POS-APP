@@ -133,9 +133,12 @@
 //   }
 // }
 
-// ignore_for_file: library_private_types_in_public_api, camel_case_types
+// ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:flutter/material.dart';
+import 'package:sfe/screens/finish.dart';
+import 'package:sfe/widgets/widget.dart';
+
+List<List<String>> selectedItems = [];
 
 class item extends StatefulWidget {
   final List<String> data;
@@ -148,12 +151,19 @@ class item extends StatefulWidget {
 
 class _itemState extends State<item> {
   late List<String> data;
-  int num = 1;
+  int quantity = 1;
+  TextEditingController specialnote = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     data = widget.data;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    specialnote.dispose();
   }
 
   @override
@@ -174,11 +184,20 @@ class _itemState extends State<item> {
           ),
         ),
         body: Container(
-            height: 500,
+            height: 450,
             width: 330,
-            margin: const EdgeInsets.only(right: 16.0, left: 16.0, top: 90),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 90),
             decoration: BoxDecoration(
-              border: Border.all(),
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 199, 194, 194).withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
             child: Column(
               children: [
@@ -207,16 +226,14 @@ class _itemState extends State<item> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                const SizedBox(height: 40),
                 // Quantity:
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const Text(
                       " Quantity : ",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 17,
                         color: Color.fromARGB(255, 66, 66, 66),
                         fontWeight: FontWeight.bold,
@@ -237,7 +254,8 @@ class _itemState extends State<item> {
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  num = num > 1 ? num - 1 : num;
+                                  quantity =
+                                      quantity > 1 ? quantity - 1 : quantity;
                                 });
                               },
                               icon: const Icon(
@@ -245,11 +263,11 @@ class _itemState extends State<item> {
                                 color: Colors.black,
                               ),
                             ),
-                            Text(num.toString()),
+                            Text(quantity.toString()),
                             IconButton(
                               onPressed: () {
                                 setState(() {
-                                  num += 1;
+                                  quantity += 1;
                                 });
                               },
                               icon: const Icon(
@@ -263,23 +281,23 @@ class _itemState extends State<item> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                const SizedBox(height: 30),
                 // Special Note:
-                const Row(
+                Row(
                   children: [
-                    Text(
+                    const Text(
                       " Special Note: ",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 16,
                         color: Color.fromARGB(255, 66, 66, 66),
                         fontWeight: FontWeight.bold,
                         fontFamily: "myfont",
                       ),
                     ),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
+                        controller: specialnote,
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(),
                           hintText: 'Enter your note',
@@ -288,26 +306,163 @@ class _itemState extends State<item> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                const SizedBox(height: 40),
                 // Price Total
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(" Price: "),
-                    Text("${num * 100} DH "),
+                    const Text(
+                      " Total Price: ",
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Color.fromARGB(255, 66, 66, 66),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "myfont",
+                      ),
+                    ),
+                    Text(
+                      "${quantity * 100} DH ",
+                      style: const TextStyle(
+                        fontSize: 17,
+                        color: Color.fromARGB(255, 66, 66, 66),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "myfont",
+                      ),
+                    ),
                   ],
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
-                //buttons
+                const SizedBox(height: 40),
+                // Buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(onPressed: () {}, child: const Text("Back")),
-                    ElevatedButton(onPressed: () {}, child: const Text("Next")),
-                    ElevatedButton(onPressed: () {}, child: const Text("Ok")),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.amber[400],
+                      ),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(
+                                "Are you sure?",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                              content: Text(
+                                "Do you really want to cancel?",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                    overlayColor: MaterialStateProperty.all(
+                                        Colors.red[100]),
+                                  ),
+                                  onPressed: () {
+                                    // Add your code here for "Yes" button press
+                                    Navigator.popUntil(
+                                        context, (route) => route.isFirst);
+                                    selectedItems.clear();
+                                  },
+                                  child: Text(
+                                    "Yes",
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ),
+                                TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                    overlayColor: MaterialStateProperty.all(
+                                        Colors.grey[100]),
+                                  ),
+                                  onPressed: () {
+                                    // Add your code here for "No" button press
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    "No",
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              backgroundColor: Colors.white,
+                              elevation: 4.0,
+                            );
+                          },
+                        );
+                      },
+                      child: const Text("Cancel Order"),
+                    ),
+                    //if the user click the button "Next" , the item will be saved with quantity and price
+                    //and take the user back to the food page to choose another item.
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.amber[400],
+                      ),
+                      onPressed: () {
+                        // Save the selected food item's details in a list
+                        List<String> selectedItemDetails = [
+                          data[1], // item name
+                          quantity.toString(), // quantity
+                          (quantity * 100).toString(), // total price
+                        ];
+                        selectedItems.add(selectedItemDetails);
+                        print(
+                            "${selectedItemDetails[0]} ${selectedItemDetails[1]}");
+                        // Show a message
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                '${selectedItemDetails[1]} ${selectedItemDetails[0]} added to cart!'),
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                        // Take the user back to the food page to choose another item
+                        Navigator.pop(context, selectedItemDetails);
+                      },
+                      child: const Text("Next"),
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.amber[400],
+                        ),
+                        onPressed: () {
+                          List<String> selectedItemDetails = [
+                            data[1], // item name
+                            quantity.toString(), // quantity
+                            (quantity * 100).toString(), // total price
+                          ];
+                          selectedItems.add(selectedItemDetails);
+                          print(
+                              "${selectedItemDetails[0]} ${selectedItemDetails[1]}");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Finish()),
+                          );
+                        },
+                        child: const Text("Finish")),
                   ],
                 ),
               ],

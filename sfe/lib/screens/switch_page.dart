@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:sfe/screens/first_screen.dart';
+import 'package:sfe/widgets/widget.dart';
 
 void main() {
   runApp(const MaterialApp(
