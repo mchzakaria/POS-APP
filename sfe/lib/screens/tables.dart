@@ -407,18 +407,19 @@ class _TablesState extends State<Tables> {
     return GestureDetector(
       onTap: () => _navigateToFoodScreen(num),
       child: Container(
-        width: 70,
-        height: 70,
+        width: 160,
+        height: 140,
         decoration: BoxDecoration(
-          color: Colors.amber[100],
-          borderRadius: BorderRadius.circular(70),
+          color: Colors.amber[300],
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.black, width: 1),
         ),
         child: Center(
           child: Text(
-            'T-$num',
+            'Table-$num',
             style: const TextStyle(
               fontSize: 17,
+              fontFamily: "myfont",
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -431,55 +432,73 @@ class _TablesState extends State<Tables> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 85.0, bottom: 80, top: 80),
-                child: Text(
-                  'Choose a Table',
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 85.0, bottom: 20, top: 35),
+                  child: Text(
+                    'Choose a Table',
+                    style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "myfont"),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildTable('01'),
-                  _buildTable('02'),
-                  _buildTable('03'),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildTable('04'),
-                  _buildTable('05'),
-                  _buildTable('06'),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildTable('07'),
-                  _buildTable('08'),
-                  _buildTable('09'),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildTable('10'),
-                  _buildTable('11'),
-                  _buildTable('12'),
-                ],
-              ),
-            ],
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildTable('01'),
+                    _buildTable('02'),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildTable('03'),
+                    _buildTable('04'),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildTable('05'),
+                    _buildTable('06'),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildTable('07'),
+                    _buildTable('08'),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildTable('09'),
+                    _buildTable('10'),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildTable('11'),
+                    _buildTable('12'),
+                  ],
+                ),
+                const SizedBox(height: 20)
+              ],
+            ),
           ),
         ),
       ),

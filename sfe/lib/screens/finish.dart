@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sfe/screens/item.dart';
 import 'package:sfe/screens/meals.dart';
+import 'package:sfe/screens/tables.dart';
 
 class Finish extends StatefulWidget {
   const Finish({super.key});
@@ -24,7 +25,8 @@ class _FinishState extends State<Finish> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'TABLE',
+                  'TABLE:             ${number}',
+                  // ignore: prefer_const_constructors
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -47,9 +49,13 @@ class _FinishState extends State<Finish> {
                   itemBuilder: (BuildContext context, int index) {
                     final item = selectedItems[index];
                     return ListTile(
-                      title: Text(item[0]), // item name
-                      subtitle:
-                          Text('Quantity: ${item[1]}, Total Price: ${item[2]}'),
+                      title: Text(item[0],
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "myfont")), // item name
+                      subtitle: Text(
+                        'Quantity: ${item[1]}, Price: ${item[2]}, Note: ${item[3]}',
+                      ),
                       trailing: IconButton(
                         icon: const Icon(Icons.remove, color: Colors.red),
                         onPressed: () {
@@ -80,7 +86,16 @@ class _FinishState extends State<Finish> {
                       child: const Text('Cancel'),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        print("LIST : ");
+                        print("NUM DE TABLE :${number}");
+                        print("ORDERS:");
+                        for (int i = 0; i < selectedItems.length; i++) {
+                          print(
+                              "${selectedItems[i][0]} ${selectedItems[i][1]} ${selectedItems[i][2]} ${selectedItems[i][3]}");
+                        }
+                        // print("${selectedItems[0][0]}");
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.green,
                         onPrimary: Colors.white,

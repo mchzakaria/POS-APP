@@ -426,15 +426,14 @@ class _itemState extends State<item> {
                           data[1], // item name
                           quantity.toString(), // quantity
                           (quantity * 100).toString(), // total price
+                          specialnote.text //message
                         ];
                         selectedItems.add(selectedItemDetails);
-                        print(
-                            "${selectedItemDetails[0]} ${selectedItemDetails[1]}");
                         // Show a message
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                                '${selectedItemDetails[1]} ${selectedItemDetails[0]} added to cart!'),
+                                '${selectedItemDetails[1]} ${selectedItemDetails[0]}  ${selectedItemDetails[3]} added !'),
                             duration: const Duration(seconds: 2),
                           ),
                         );
@@ -452,10 +451,9 @@ class _itemState extends State<item> {
                             data[1], // item name
                             quantity.toString(), // quantity
                             (quantity * 100).toString(), // total price
+                            specialnote.text //message
                           ];
                           selectedItems.add(selectedItemDetails);
-                          print(
-                              "${selectedItemDetails[0]} ${selectedItemDetails[1]}");
                           Navigator.push(
                             context,
                             MaterialPageRoute(

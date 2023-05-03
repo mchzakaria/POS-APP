@@ -429,6 +429,7 @@ class _FoodState extends State<Food> {
             flex: 1,
             child: Container(
               color: Colors.amber,
+              width: double.infinity,
               child: Column(
                 children: [
                   _buildSidebarIconButton(
@@ -447,7 +448,7 @@ class _FoodState extends State<Food> {
           ),
           // Right content
           Expanded(
-            flex: 2,
+            flex: 3,
             child: AnimatedSwitcher(
               duration: Duration(milliseconds: 200),
               child: _buildPage(),
@@ -472,7 +473,7 @@ class _FoodState extends State<Food> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: _selectedPageIndex == index
-                  ? Color.fromARGB(255, 244, 11, 11).withOpacity(0.2)
+                  ? const Color.fromARGB(255, 244, 11, 11).withOpacity(0.2)
                   : Colors.transparent,
             ),
             child: Image.asset(iconData, color: Colors.white),
@@ -506,3 +507,6 @@ class _FoodState extends State<Food> {
     }
   }
 }
+
+
+
