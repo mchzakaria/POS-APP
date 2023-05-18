@@ -1,6 +1,4 @@
-
 import 'package:sfe/widgets/widget.dart';
-
 
 /////////// The First Page //////////////////////////////
 class Welcome extends StatelessWidget {
@@ -16,9 +14,13 @@ class Welcome extends StatelessWidget {
         elevation: 0.0,
         actions: [
           GestureDetector(
-            child: const Text(
-              "Skip",
-              style: TextStyle(color: Colors.black, fontSize: 21),
+            child: const Padding(
+              padding: EdgeInsets.only(right: 10.0, top: 8),
+              child: Text(
+                "Skip",
+                style: TextStyle(
+                    fontFamily: "myfont", color: Colors.black, fontSize: 16),
+              ),
             ),
             onTap: () {
               Navigator.push(
@@ -80,9 +82,13 @@ class Welcome2 extends StatelessWidget {
         elevation: 0.0,
         actions: [
           GestureDetector(
-            child: const Text(
-              "Skip",
-              style: TextStyle(color: Colors.black, fontSize: 21),
+            child: const Padding(
+              padding: EdgeInsets.only(right: 10.0, top: 8),
+              child: Text(
+                "Skip",
+                style: TextStyle(
+                    fontFamily: "myfont", color: Colors.black, fontSize: 16),
+              ),
             ),
             onTap: () {
               Navigator.push(
@@ -93,41 +99,26 @@ class Welcome2 extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
+      body: SizedBox(
         height: 740,
         width: double.infinity,
         // color: Colors.green,
-        child: Container(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 90,
-              ),
-              Image.asset(
-                "assets/images/serv.png",
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const Text(
-                "Order Your Food ",
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 9,
-              ),
-              const Text(
-                "Just a few click to enter our reservation app to get the best services and we maintained quality",
-                style: TextStyle(
-                  fontSize: 19,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(
-                height: 100,
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            const SizedBox(height: 50),
+            Image.asset("assets/images/serv.png"),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text("Order Your Food ",
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 9),
+            const Text(
+              "Just a few click to enter our reservation app to get the best services and we maintained quality",
+              style: TextStyle(fontSize: 19, color: Colors.grey),
+            ),
+            const SizedBox(height: 100),
+          ],
         ),
       ),
     ));
@@ -148,9 +139,13 @@ class Welcome3 extends StatelessWidget {
         elevation: 0.0,
         actions: [
           GestureDetector(
-            child: const Text(
-              "Skip",
-              style: TextStyle(color: Colors.black, fontSize: 21),
+            child: const Padding(
+              padding: EdgeInsets.only(right: 10.0, top: 8),
+              child: Text(
+                "Skip",
+                style: TextStyle(
+                    fontFamily: "myfont", color: Colors.black, fontSize: 16),
+              ),
             ),
             onTap: () {
               Navigator.push(
@@ -161,37 +156,27 @@ class Welcome3 extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
+      body: SizedBox(
         height: 740,
         width: double.infinity,
-        child: Container(
-          child: Column(
-            children: [
-              Image.asset("assets/images/food.jpg"),
-              const SizedBox(
-                height: 30,
-              ),
-              const Text(
-                " Enjoy Delicious food ",
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 9,
-              ),
-              const Text(
-                "Just a few click to enter our reservation app to get the best services and we maintained quality",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(
-                height: 135,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
+        child: Column(
+          children: [
+            Image.asset("assets/images/food.jpg"),
+            const SizedBox(height: 30),
+            const Text(" Enjoy Delicious food ",
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 9),
+            const Text(
+              "Just a few click to enter our reservation app to get the best services and we maintained quality",
+              style: TextStyle(fontSize: 18, color: Colors.grey),
+            ),
+            const SizedBox(height: 135),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: IconButton(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -199,13 +184,11 @@ class Welcome3 extends StatelessWidget {
                               builder: (context) => const Login()),
                         );
                       },
-                      icon: Image.asset(
-                        "assets/icons/next.png",
-                      ))
-                ],
-              )
-            ],
-          ),
+                      icon: const Icon(Icons.chevron_right, size: 30)),
+                )
+              ],
+            )
+          ],
         ),
       ),
     ));

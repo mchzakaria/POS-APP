@@ -394,13 +394,17 @@
 
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:flutter/material.dart';
+import 'package:sfe/screens/finish.dart';
 import 'package:sfe/screens/food/boisson.dart';
 import 'package:sfe/screens/food/desserts.dart';
 import 'package:sfe/screens/food/jus.dart';
 import 'package:sfe/screens/food/plat.dart';
 import 'package:sfe/screens/food/salade.dart';
 import 'package:sfe/screens/food/soupe.dart';
+import 'package:badges/badges.dart' as badges;
+import 'package:sfe/widgets/widget.dart';
+
+var id_article;
 
 class Food extends StatefulWidget {
   @override
@@ -432,6 +436,26 @@ class _FoodState extends State<Food> {
               width: double.infinity,
               child: Column(
                 children: [
+                  const SizedBox(height: 10),
+                  badges.Badge(
+                    badgeStyle: const badges.BadgeStyle(
+                      badgeColor: Colors.red,
+                      padding: EdgeInsets.all(6),
+                    ),
+                    badgeContent: Text((selectedItems.length).toString(),
+                        style: TextStyle(color: Colors.white)),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Finish()),
+                        );
+                      },
+                      child: const Icon(Icons.shopping_bag_outlined,
+                          size: 32, color: Colors.white),
+                    ),
+                  ),
                   _buildSidebarIconButton(
                       "assets/icons/cafe.png", "Hot Drinks", 0),
                   _buildSidebarIconButton("assets/icons/j32.png", "Juice", 1),
@@ -442,6 +466,11 @@ class _FoodState extends State<Food> {
                   _buildSidebarIconButton(
                       "assets/icons/burger.png", "Dishes", 5),
                   _buildSidebarIconButton("assets/icons/d32.png", "Dessert", 6),
+                  SizedBox(height: 24),
+                  CircleAvatar(
+                      backgroundColor: Colors.red[800],
+                      child: Text("$na1me $na2me",
+                          style: TextStyle(color: Colors.white))),
                 ],
               ),
             ),
@@ -469,7 +498,7 @@ class _FoodState extends State<Food> {
           Container(
             width: 60,
             height: 60,
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: _selectedPageIndex == index
@@ -507,6 +536,3 @@ class _FoodState extends State<Food> {
     }
   }
 }
-
-
-

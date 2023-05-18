@@ -1,81 +1,122 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:sfe/Admin/viw.dart';
+import 'package:sfe/Admin/add_user.dart';
+import 'package:sfe/Admin/add_product.dart';
+import 'package:sfe/Admin/getallusers.dart';
+import 'package:sfe/Admin/ShowProducts.dart';
+import 'package:sfe/screens/tables.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: GG(),
+  runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: AdminPage(),
   ));
 }
 
-class GG extends StatefulWidget {
-  const GG({Key? key}) : super(key: key);
+class AdminPage extends StatefulWidget {
+  const AdminPage({Key? key}) : super(key: key);
 
   @override
-  State<GG> createState() => _GGState();
+  State<AdminPage> createState() => _AdminPageState();
 }
 
-class _GGState extends State<GG> {
-  TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-
-  Future<void> insertrecord() async {
-    if (name.text != "" || email.text != "" || password.text != "") {
-      try {
-        String uri = "http://192.168.1.251:4433/phpscript/db.php";
-        print("Zack1");
-        var res = await http.post(Uri.parse(uri), body: {
-          "name": name.text,
-          "email": email.text,
-          "password": password.text,
-        });
-        print(
-            "Got response from server: ${res.body}"); // Add this line to print the response to the console
-        var response = jsonDecode(res.body);
-        print(response);
-        if (response["success"] == "true") {
-          print("Record inserted");
-          name.text = " ";
-          email.text = " ";
-          password.text = " ";
-        } else {
-          print("some issue");
-        }
-      } catch (e) {
-        print(e);
-      }
-    } else {
-      print("please enter data ");
-    }
-  }
-
+class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text("Insert Data ")),
-        body: Column(
-          children: [
-            TextField(controller: name),
-            TextField(controller: email),
-            TextField(controller: password),
-            ElevatedButton(
-                onPressed: () {
-                  insertrecord();
-                },
-                child: Text("Click ME")),
-            SizedBox(height: 10),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => view_data()));
-                },
-                child: Text("Show view"))
-          ],
+        appBar: AppBar(
+          title: const Text(" Hello Admin ",
+              style: TextStyle(fontSize: 18, fontFamily: "myfont")),
+          centerTitle: true,
+          backgroundColor: Colors.amber[400],
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Card(
+                child: ListTile(
+                  title: const Text("Add Product"),
+                  leading: Container(
+                      width: 27,
+                      height: 27,
+                      color: Colors.amber,
+                      child: const Icon(Icons.add_box, color: Colors.white)),
+                  trailing: const Icon(Icons.chevron_left),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const addProduct()));
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+              Card(
+                child: ListTile(
+                  title: const Text("Get All Users"),
+                  leading: Container(
+                      width: 27,
+                      height: 27,
+                      color: Colors.amber,
+                      child: const Icon(Icons.group, color: Colors.white)),
+                  trailing: const Icon(Icons.chevron_left),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => getallUsers()));
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+              Card(
+                child: ListTile(
+                  title: const Text("Show Product"),
+                  leading: Container(
+                      width: 27,
+                      height: 27,
+                      color: Colors.amber,
+                      child: const Icon(Icons.check_box, color: Colors.white)),
+                  trailing: const Icon(Icons.chevron_left),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => view_data()));
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+              Card(
+                child: ListTile(
+                  title: const Text(" Add User "),
+                  leading: Container(
+                      width: 27,
+                      height: 27,
+                      color: Colors.amber,
+                      child: const Icon(Icons.person, color: Colors.white)),
+                  trailing: const Icon(Icons.chevron_left),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => addUser()));
+                  },
+                ),
+              ),
+              const SizedBox(height: 30),
+              OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Tables()),
+                    );
+                  },
+                  child: const Text(" Switch To Serveur ",
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 25, 25, 25)))),
+              OutlinedButton(
+                  onPressed: () {},
+                  child: const Text(" Print ",
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 25, 25, 25)))),
+            ],
+          ),
         ),
       ),
     );

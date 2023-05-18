@@ -6,5 +6,6 @@ export 'package:sfe/screens/login.dart';
 export 'package:sfe/screens/forgetPassword.dart';
 export 'package:sfe/screens/first_screen.dart';
 export 'package:path_provider/path_provider.dart';
+export 'dart:convert';
 
 

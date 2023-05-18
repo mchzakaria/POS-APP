@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class view_data extends StatefulWidget {
   const view_data({super.key});
 
-  @override 
+  @override
   State<view_data> createState() => _view_dataState();
 }
 
@@ -15,25 +15,29 @@ class _view_dataState extends State<view_data> {
   List<List<String>> dataList = [];
 
   Future<void> getrecord() async {
-    String uri = "http://192.168.1.251:4433/phpscript/view.php";
+    String uri = "http://localhost:4433/phpscript/show_products.php";
     try {
       var response = await http.get(Uri.parse(uri));
       setState(() {
         userdata = jsonDecode(response.body);
       });
-      print("First");
-      print(userdata.runtimeType);
+      // print("First");
+      // print(userdata.runtimeType);
+      // print(userdata.length);
 
       for (var i = 0; i < userdata.length; i++) {
         List<String> rowList = [];
 
+        rowList.add(userdata[i]['url']);
         rowList.add(userdata[i]['name']);
-        rowList.add(userdata[i]['email']);
-        rowList.add(userdata[i]['password']);
+        rowList.add(userdata[i]['price']);
+        rowList.add(userdata[i]['type']);
 
         dataList.add(rowList);
       }
-      print(dataList.runtimeType);
+      // print("Data Getted Succesfully");
+      // print(dataList.runtimeType);
+      // print(dataList.length);
     } catch (e) {
       print(e);
     }
@@ -49,7 +53,10 @@ class _view_dataState extends State<view_data> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(title: Text(" View data ")),
+      appBar: AppBar(
+          title: const Text(" Show Product "),
+          centerTitle: true,
+          backgroundColor: Colors.amber[400]),
       body: ListView.builder(
           itemCount: dataList.length,
           itemBuilder: (context, index) {

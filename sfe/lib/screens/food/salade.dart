@@ -1,40 +1,57 @@
 import 'package:sfe/widgets/widget.dart';
+import 'package:http/http.dart' as http;
 
-List<List<String>> data = [
-  // ['URL', 'PRICE'],
-  ["assets/images/Salade César au poulet.jpeg", " Caesar salad  ", "100 DH"],
-  ["assets/images/Salade composée au thon.jpeg", "Salad with Tuna ", "100 DH"],
-  [
-    "assets/images/Salade de betteraves et œufs durs.jpeg",
-    " Beet salad & eggs",
-    "100 DH"
-  ],
-  [
-    "assets/images/Salade de roquette aux figues et aux poires.jpeg",
-    " Arugula salad ",
-    "100 DH"
-  ],
-  ["assets/images/salade necoise.jpeg", " Nicoise salad ", "100 DH"],
-  ["assets/images/Salade Waldorf facile.jpg", " Waldorf Salad ", "100 DH"],
-];
-
-class Salade extends StatelessWidget {
+class Salade extends StatefulWidget {
   const Salade({super.key});
 
   @override
+  State<Salade> createState() => _SaladeState();
+}
+
+class _SaladeState extends State<Salade> {
+  List userdata = [];
+  List<List<String>> Salade = [];
+  Future<void> getrecord() async {
+    String uri = "http://localhost:4433/phpscript/final.php";
+    try {
+      var response = await http.post(Uri.parse(uri),body: {"type":"Salade"});
+      setState(() {
+        userdata = jsonDecode(response.body);
+      });
+
+      for (var i = 0; i < userdata.length; i++) {
+        List<String> rowList = [];
+
+        rowList.add(userdata[i]['url']);
+        rowList.add(userdata[i]['name']);
+        rowList.add(userdata[i]['price']);
+        rowList.add(userdata[i]['type']);
+        rowList.add(userdata[i]['uid']);
+
+        Salade.add(rowList);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    getrecord();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.only(top: 15),
-          child: Column(
-            children: [
-              const SizedBox(height: 14),
-              Container(
-                width: 187,
+    return  SafeArea(
+      child: Scaffold(
+        body: ListView.builder(
+            itemCount: Salade.length,
+            itemBuilder: (context, index) {
+              
+              return Container(
                 height: 200,
+                margin: const EdgeInsets.only(
+                    bottom: 10, left: 30, right: 30, top: 10),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   // color: Colors.red,
@@ -51,10 +68,12 @@ class Salade extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTap: () {
+                    id_article = int.parse(Salade[index][4]);
+                    print(id_article);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => item(data[0]),
+                        builder: (context) => item(Salade[index]),
                       ),
                     );
                   },
@@ -63,24 +82,22 @@ class Salade extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: Image.asset(
-                          data[0][0],
+                          Salade[index][0],
                           width: 155,
                           height: 130,
                         ),
                       ),
                       Text(
-                        data[0][1],
+                        Salade[index][1],
                         style: const TextStyle(
                             fontSize: 17,
                             color: Color.fromARGB(255, 66, 66, 66),
                             fontWeight: FontWeight.bold,
                             fontFamily: "myfont"),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      const SizedBox(height: 8),
                       Text(
-                        data[0][2],
+                        Salade[index][2],
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 16,
@@ -91,326 +108,9 @@ class Salade extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 14),
-              Container(
-                width: 187,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  // color: Colors.red,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 225, 224, 224)
-                          .withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => item(data[1]),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          data[1][0],
-                          width: 165,
-                          height: 120,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        data[1][1],
-                        style: const TextStyle(
-                            fontSize: 17,
-                            color: Color.fromARGB(255, 66, 66, 66),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "myfont"),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        data[1][2],
-                        style: const TextStyle(
-                          color: Colors.amber,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "myfont",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 14),
-              //SECOND
-              Container(
-                width: 187,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  // color: Colors.red,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 225, 224, 224)
-                          .withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => item(data[2]),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: Image.asset(
-                          data[2][0],
-                          width: 155,
-                          height: 130,
-                        ),
-                      ),
-                      Text(
-                        data[2][1],
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Color.fromARGB(255, 66, 66, 66),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "myfont"),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        data[2][2],
-                        style: const TextStyle(
-                          color: Colors.amber,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "myfont",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 14),
-              Container(
-                width: 187,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  // color: Colors.red,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 225, 224, 224)
-                          .withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => item(data[3]),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          data[3][0],
-                          width: 165,
-                          height: 130,
-                        ),
-                      ),
-                      Text(
-                        data[3][1],
-                        style: const TextStyle(
-                            fontSize: 17,
-                            color: Color.fromARGB(255, 66, 66, 66),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "myfont"),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        data[3][2],
-                        style: const TextStyle(
-                          color: Colors.amber,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "myfont",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 14),
-              //THIRD
-
-              Container(
-                width: 187,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  // color: Colors.red,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 225, 224, 224)
-                          .withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => item(data[4]),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          data[4][0],
-                          width: 175,
-                          height: 130,
-                        ),
-                      ),
-                      Text(
-                        data[4][1],
-                        style: const TextStyle(
-                            fontSize: 17,
-                            color: Color.fromARGB(255, 66, 66, 66),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "myfont"),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        data[4][2],
-                        style: const TextStyle(
-                          color: Colors.amber,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "myfont",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 14),
-              Container(
-                width: 187,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  // color: Colors.red,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 225, 224, 224)
-                          .withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => item(data[5]),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          data[5][0],
-                          width: 165,
-                          height: 130,
-                        ),
-                      ),
-                      Text(
-                        data[5][1],
-                        style: const TextStyle(
-                            fontSize: 17,
-                            color: Color.fromARGB(255, 66, 66, 66),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "myfont"),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        data[5][2],
-                        style: const TextStyle(
-                          color: Colors.amber,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "myfont",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 30),
-            ],
-          ),
-        ),
+              );
+            }),
       ),
-    ));
+    );
   }
 }

@@ -135,6 +135,8 @@
 
 // ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:html';
+
 import 'package:sfe/screens/finish.dart';
 import 'package:sfe/widgets/widget.dart';
 
@@ -150,7 +152,7 @@ class item extends StatefulWidget {
 }
 
 class _itemState extends State<item> {
-  late List<String> data;
+  List<String> data = [];
   int quantity = 1;
   TextEditingController specialnote = TextEditingController();
 
@@ -202,29 +204,33 @@ class _itemState extends State<item> {
             child: Column(
               children: [
                 // Item:
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: Image.asset(
-                        data[0],
-                        width: 155,
-                        height: 130,
-                      ),
-                    ),
-                    Flexible(
-                      child: Text(
-                        "  ${data[1]}  ",
-                        style: const TextStyle(
-                          fontSize: 17,
-                          color: Color.fromARGB(255, 66, 66, 66),
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "myfont",
+                Container(
+                  // color: Colors.green,
+                  margin: const EdgeInsets.only(left: 17),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Image.asset(
+                          data[0],
+                          width: 155,
+                          height: 130,
                         ),
                       ),
-                    ),
-                  ],
+                      Flexible(
+                        child: Text(
+                          "  ${data[1]}  ",
+                          style: const TextStyle(
+                            fontSize: 17,
+                            color: Color.fromARGB(255, 66, 66, 66),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "myfont",
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 40),
                 // Quantity:
@@ -321,7 +327,7 @@ class _itemState extends State<item> {
                       ),
                     ),
                     Text(
-                      "${quantity * 100} DH ",
+                      " ${quantity * int.parse(data[2])} DH ",
                       style: const TextStyle(
                         fontSize: 17,
                         color: Color.fromARGB(255, 66, 66, 66),
@@ -425,8 +431,10 @@ class _itemState extends State<item> {
                         List<String> selectedItemDetails = [
                           data[1], // item name
                           quantity.toString(), // quantity
-                          (quantity * 100).toString(), // total price
-                          specialnote.text //message
+                          (quantity * int.parse(data[2]))
+                              .toString(), // total price
+                          specialnote.text, //message
+                          data[4].toString() //id
                         ];
                         selectedItems.add(selectedItemDetails);
                         // Show a message
@@ -439,6 +447,7 @@ class _itemState extends State<item> {
                         );
                         // Take the user back to the food page to choose another item
                         Navigator.pop(context, selectedItemDetails);
+                        // Navigator.push(context, route);
                       },
                       child: const Text("Next"),
                     ),
@@ -450,14 +459,20 @@ class _itemState extends State<item> {
                           List<String> selectedItemDetails = [
                             data[1], // item name
                             quantity.toString(), // quantity
-                            (quantity * 100).toString(), // total price
-                            specialnote.text //message
+                            (quantity * int.parse(data[2]))
+                                .toString(), // total price
+                            specialnote.text, //message
+                            data[4].toString() //id
                           ];
                           selectedItems.add(selectedItemDetails);
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const Finish()),
+                          // );
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const Finish()),
+                            MaterialPageRoute(builder: (context) => Food()),
                           );
                         },
                         child: const Text("Finish")),

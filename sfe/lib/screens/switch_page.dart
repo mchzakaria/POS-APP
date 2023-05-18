@@ -19,9 +19,9 @@ class NavigationPoints extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildNavigationPoint(currentPageIndex == 0),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         _buildNavigationPoint(currentPageIndex == 1),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         _buildNavigationPoint(currentPageIndex == 2),
       ],
     );
@@ -71,7 +71,7 @@ class _SwitchState extends State<Switch> {
             children: [
               Welcome(),
               Welcome2(),
-              Welcome3(),
+              Welcome3(), 
             ],
           ),
           Positioned(
