@@ -1,6 +1,6 @@
 <?php
+session_start();
 include 'test.php';
-
 if(isset($_POST["type"])){
     $type = $_POST["type"];
 }

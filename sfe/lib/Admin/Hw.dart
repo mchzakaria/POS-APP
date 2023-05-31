@@ -109,12 +109,13 @@ class _AdminPageState extends State<AdminPage> {
                   },
                   child: const Text(" Switch To Serveur ",
                       style:
-                          TextStyle(color: Color.fromARGB(255, 25, 25, 25)))),
-              OutlinedButton(
-                  onPressed: () {},
-                  child: const Text(" Print ",
-                      style:
-                          TextStyle(color: Color.fromARGB(255, 25, 25, 25)))),
+                          TextStyle(color: Color.fromARGB(255, 245, 149, 39)))),
+              const SizedBox(height: 20),
+              // OutlinedButton(
+              //   onPressed: () {},
+              //   child: const Text(" Print ",
+              //       style: TextStyle(color: Color.fromARGB(255, 25, 25, 25))),
+              // ),
             ],
           ),
         ),

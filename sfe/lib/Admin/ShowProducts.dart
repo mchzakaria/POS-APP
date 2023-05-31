@@ -15,7 +15,7 @@ class _view_dataState extends State<view_data> {
   List<List<String>> dataList = [];
 
   Future<void> getrecord() async {
-    String uri = "http://localhost:4433/phpscript/show_products.php";
+    String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/show_products.php";
     try {
       var response = await http.get(Uri.parse(uri));
       setState(() {

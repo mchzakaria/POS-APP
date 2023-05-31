@@ -135,9 +135,6 @@
 
 // ignore_for_file: library_private_types_in_public_api, camel_case_types, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'dart:html';
-
-import 'package:sfe/screens/finish.dart';
 import 'package:sfe/widgets/widget.dart';
 
 List<List<String>> selectedItems = [];

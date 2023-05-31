@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:sfe/main.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
 class Food {
   final String name;
   final double price;

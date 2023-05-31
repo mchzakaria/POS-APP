@@ -37,7 +37,7 @@ class _addUserState extends State<addUser> {
         password.text != "" ||
         job.text != "") {
       try {
-        String uri = "http://localhost:4433/phpscript/add_users.php";
+        String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/add_users.php";
         var res = await http.post(Uri.parse(uri), body: {
           "username": username.text,
           "password": password.text,

@@ -505,7 +505,3 @@ class _TablesState extends State<Tables> {
     );
   } 
 }
-
-void main() {
-  runApp(const MaterialApp(home: Tables(), debugShowCheckedModeBanner: false));
-} 

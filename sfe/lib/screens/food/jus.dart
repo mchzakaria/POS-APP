@@ -13,7 +13,7 @@ class _JusState extends State<Jus> {
   List userdata = [];
   List<List<String>> Jus = [];
   Future<void> getrecord() async {
-   String uri = "http://localhost:4433/phpscript/final.php";
+   String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/final.php";
     try {
       var response = await http.post(Uri.parse(uri),body: {"type":"Jus"});
       setState(() {
@@ -98,7 +98,7 @@ class _JusState extends State<Jus> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        Jus[index][2],
+                        "${Jus[index][2]} DH",
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 16,

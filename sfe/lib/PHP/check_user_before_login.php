@@ -1,4 +1,5 @@
 <?php
+    session_start();
     header('Content-Type: application/json');
     try{
         $conn = mysqli_connect("localhost","root","","pos_db");
@@ -22,6 +23,8 @@
                 // } else {
                 //     echo "Doesn't Exist";
                 // }
+                $_SESSION['username'] = $username ;
+                $_SESSION['password'] = $password ;
                 $arr=[];
                 while($row = mysqli_fetch_array($result)){
                     $arr[] = $row;

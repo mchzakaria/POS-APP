@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0-290.0.dev <4.0.0'
+  sdk: '>=2.19.0-146.2.beta <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -48,11 +48,9 @@ dependencies:
   path_provider: ^2.0.14
   mysql1: ^0.20.0
   syncfusion_flutter_datagrid: ^21.1.41
-  http: ^0.13.6
+  http: ^0.13.5
   open_file: ^3.3.1
   badges: ^3.1.1
-  blue_thermal_printer: ^1.2.3
-  esc_pos_printer: ^4.1.0
   esc_pos_utils: ^1.1.0
   
 

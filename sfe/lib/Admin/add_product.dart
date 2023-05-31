@@ -31,7 +31,7 @@ class _addProductState extends State<addProduct> {
         price.text != "" ||
         type.text != "") {
       try {
-        String uri = "http://localhost:4433/phpscript/add_product.php";
+        String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/add_product.php";
         var res = await http.post(Uri.parse(uri), body: {
           "url": url.text,
           "name": name.text,

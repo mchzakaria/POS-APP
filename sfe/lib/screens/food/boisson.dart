@@ -531,7 +531,7 @@ class _BoissonschState extends State<Boissonsch> {
   List<List<String>> Boisson_ch = [];
 
   Future<void> getrecord() async {
-    String uri = "http://localhost:4433/phpscript/final.php";
+    String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/final.php";
     try {
       var response =
           await http.post(Uri.parse(uri), body: {"type": "Boisson Chaude"});
@@ -645,7 +645,7 @@ class _BoissonsfrState extends State<Boissonsfr> {
   List userdata = [];
   List<List<String>> Boisson_fr = [];
   Future<void> getrecord() async {
-    String uri = "http://localhost:4433/phpscript/final.php";
+    String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/final.php";
     try {
       var response =
           await http.post(Uri.parse(uri), body: {"type": "Boisson Froide"});

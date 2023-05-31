@@ -18,7 +18,7 @@ class _getallUsersState extends State<getallUsers> {
   List<List<String>> dataList = [];
 
   Future<void> getrecord() async {
-    String uri = "http://localhost:4433/phpscript/get_allusers.php";
+    String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/get_allusers.php";
     try {
       var response = await http.get(Uri.parse(uri));
       setState(() {

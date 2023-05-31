@@ -49,7 +49,7 @@ class _FinishState extends State<Finish> {
     final formattedDate = DateFormat('yyyy-MM-dd').format(currentDate);
     final randomId = generateRandomId();
     try {
-      String uri = "http://localhost:4433/phpscript/insert_orders.php";
+      String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/insert_orders.php";
       var res;
       for (var i = 0; i < selectedItems.length; i++) {
         res = await http.post(Uri.parse(uri), body: {

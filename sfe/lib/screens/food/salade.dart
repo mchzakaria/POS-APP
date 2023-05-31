@@ -12,7 +12,7 @@ class _SaladeState extends State<Salade> {
   List userdata = [];
   List<List<String>> Salade = [];
   Future<void> getrecord() async {
-    String uri = "http://localhost:4433/phpscript/final.php";
+    String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/final.php";
     try {
       var response = await http.post(Uri.parse(uri),body: {"type":"Salade"});
       setState(() {
@@ -97,7 +97,7 @@ class _SaladeState extends State<Salade> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        Salade[index][2],
+                        "${Salade[index][2]} DH",
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 16,

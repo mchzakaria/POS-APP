@@ -13,7 +13,7 @@ class _SoupeState extends State<Soupe> {
   List userdata = [];
   List<List<String>> Soupe = [];
   Future<void> getrecord() async {
-    String uri = "http://localhost:4433/phpscript/final.php";
+    String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/final.php";
     try {
       var response = await http.post(Uri.parse(uri),body: {"type":"Soupe"});
       setState(() {
@@ -98,7 +98,7 @@ class _SoupeState extends State<Soupe> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        Soupe[index][2],
+                        "${Soupe[index][2]} DH",
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 16,

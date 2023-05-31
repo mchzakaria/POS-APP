@@ -1,37 +1,86 @@
-import 'package:flutter/material.dart';
-import 'dart:io';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:sfe/widgets/widget.dart';
 
 void main() {
-  runApp(const MaterialApp(home: MyApp()));
+  runApp(const MaterialApp(
+    home: MyApp(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class NavigationPoints extends StatelessWidget {
+  final int currentPageIndex;
+
+  const NavigationPoints({Key? key, required this.currentPageIndex})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildNavigationPoint(currentPageIndex == 0),
+        const SizedBox(width: 8),
+        _buildNavigationPoint(currentPageIndex == 1),
+        const SizedBox(width: 8),
+        _buildNavigationPoint(currentPageIndex == 2),
+      ],
+    );
+  }
+
+  Widget _buildNavigationPoint(bool isActive) {
+    return Container(
+      width: 10,
+      height: 10,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isActive ? Colors.red : Colors.white,
+        border: Border.all(color: Colors.grey),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  _SwitchState createState() => _SwitchState();
 }
 
-class _MyAppState extends State<MyApp> {
-  TextEditingController url = TextEditingController();
+class _SwitchState extends State<MyApp> {
+  final _pageController = PageController();
+  int _currentPageIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState(() {
+        _currentPageIndex = _pageController.page!.round();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Column(
+      body: Stack(
         children: [
-          Text(''),
-          ElevatedButton(
-            onPressed:(){},
-            child: Text("Click"),
+          PageView(
+            controller: _pageController,
+            children: [
+              Welcome(),
+              Welcome2(),
+              Welcome3(), 
+            ],
+          ),
+          Positioned(
+            left: 40,
+            bottom: 16,
+            child: NavigationPoints(currentPageIndex: _currentPageIndex),
           ),
         ],
-      )),
+      ),
     );
   }
 }

@@ -12,7 +12,7 @@ class _PlatState extends State<Plat> {
   List userdata = [];
   List<List<String>> Plat = [];
   Future<void> getrecord() async {
-   String uri = "http://localhost:4433/phpscript/final.php";
+   String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/final.php";
     try {
       var response = await http.post(Uri.parse(uri),body: {"type":"Plat"});
       setState(() {
@@ -97,7 +97,7 @@ class _PlatState extends State<Plat> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        Plat[index][2],
+                        "${Plat[index][2]} DH",
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 16,

@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
     if (usernamecontroller.text != "" || passwordcontroller.text != "") {
       try {
         String uri =
-            "http://localhost:4433/phpscript/check_user_before_login.php";
+            "http://localhost:4433/POS-APP/sfe/lib/PHP/check_user_before_login.php";
         var response = await http.post(Uri.parse(uri), body: {
           "username": usernamecontroller.text,
           "password": passwordcontroller.text,

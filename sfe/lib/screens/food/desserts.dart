@@ -12,9 +12,10 @@ class _DessertsState extends State<Desserts> {
   List userdata = [];
   List<List<String>> Desserts = [];
   Future<void> getrecord() async {
-    String uri = "http://localhost:4433/phpscript/final.php";
+    String uri = "http://localhost:4433/POS-APP/sfe/lib/PHP/final.php";
     try {
-      var response = await http.post(Uri.parse(uri),body: {"type":"Desserts"});
+      var response =
+          await http.post(Uri.parse(uri), body: {"type": "Desserts"});
       setState(() {
         userdata = jsonDecode(response.body);
       });
@@ -40,14 +41,14 @@ class _DessertsState extends State<Desserts> {
     getrecord();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(
+    return SafeArea(
       child: Scaffold(
         body: ListView.builder(
             itemCount: Desserts.length,
             itemBuilder: (context, index) {
-              
               return Container(
                 height: 200,
                 margin: const EdgeInsets.only(
@@ -97,7 +98,7 @@ class _DessertsState extends State<Desserts> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        Desserts[index][2],
+                        "${Desserts[index][2]} DH",
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 16,
