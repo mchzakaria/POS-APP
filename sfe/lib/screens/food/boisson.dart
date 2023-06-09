@@ -554,6 +554,7 @@ class _BoissonschState extends State<Boissonsch> {
       print(e);
     }
   }
+
   @override
   void initState() {
     getrecord();
@@ -731,7 +732,7 @@ class _BoissonsfrState extends State<Boissonsfr> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "${Boisson_fr[index][2]} DH",
+                        "${Boisson_fr[index][2]} Dollar ",
                         style: const TextStyle(
                           color: Colors.amber,
                           fontSize: 16,

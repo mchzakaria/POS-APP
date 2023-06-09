@@ -68,10 +68,10 @@ class _SwitchState extends State<MyApp> {
         children: [
           PageView(
             controller: _pageController,
-            children: [
-              Welcome(),
-              Welcome2(),
-              Welcome3(), 
+            children: const [
+               Welcome(),
+               Welcome2(),
+               Welcome3(),
             ],
           ),
           Positioned(

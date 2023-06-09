@@ -49,11 +49,14 @@ class Welcome extends StatelessWidget {
               const SizedBox(
                 height: 9,
               ),
-              const Text(
-                "Just a few click to enter our reservation app to get the best services and we maintained quality",
-                style: TextStyle(
-                  fontSize: 19,
-                  color: Colors.grey,
+              const Padding(
+                padding: EdgeInsets.only(left: 10.0),
+                child: Text(
+                  "Just a few click to enter our reservation app to get the best services and we maintained quality",
+                  style: TextStyle(
+                    fontSize: 19,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -113,9 +116,12 @@ class Welcome2 extends StatelessWidget {
             const Text("Order Your Food ",
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
             const SizedBox(height: 9),
-            const Text(
-              "Just a few click to enter our reservation app to get the best services and we maintained quality",
-              style: TextStyle(fontSize: 19, color: Colors.grey),
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text(
+                "Just a few click to enter our reservation app to get the best services and we maintained quality",
+                style: TextStyle(fontSize: 19, color: Colors.grey),
+              ),
             ),
             const SizedBox(height: 100),
           ],
@@ -166,9 +172,12 @@ class Welcome3 extends StatelessWidget {
             const Text(" Enjoy Delicious food ",
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
             const SizedBox(height: 9),
-            const Text(
-              "Just a few click to enter our reservation app to get the best services and we maintained quality",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
+            const Padding(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Text(
+                "Just a few click to enter our reservation app to get the best services and we maintained quality",
+                style: TextStyle(fontSize: 18, color: Colors.grey),
+              ),
             ),
             const SizedBox(height: 135),
             Row(
